@@ -393,35 +393,35 @@ st.markdown(
 
 /* FORCE dropdown menu to be white */
 div[data-baseweb="popover"] {
-    background: white !important;
+    background: blue !important;
 }
 
 div[data-baseweb="menu"] {
-    background: white !important;
+    background: blue !important;
 }
 
 div[role="listbox"] {
-    background: white !important;
-    color: blue !important;
+    background: blue !important;
+    color: white !important;
     border: 1px solid #d6e0ee !important;
 }
 
 /* Individual dropdown options */
 div[role="option"] {
-    background: white !important;
-    color: blue !important;
+    background: blue !important;
+    color: white !important;
 }
 
 /* Hover effect */
 div[role="option"]:hover {
     background: #fff7ed !important;
-    color: blue !important;
+    color: white !important;
 }
 
 /* Selected item highlight */
 div[aria-selected="true"] {
     background: #e0ecff !important;
-    color: blue !important;
+    color: white !important;
 }
 /* REMOVE STREAMLIT TOP BLACK BAR */
 header {
