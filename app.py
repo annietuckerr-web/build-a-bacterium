@@ -6,9 +6,6 @@ st.set_page_config(
     layout="wide"
 )
 
-# -----------------------------
-# Helper logic
-# -----------------------------
 def determine_metabolism(oxygen, electron_acceptor):
     if oxygen == "Present":
         return "Aerobic Respiration"
@@ -19,16 +16,10 @@ def determine_metabolism(oxygen, electron_acceptor):
 
 def carbon_source_notes(carbon_source):
     if carbon_source == "Glucose":
-        return (
-            "Glucose enters central metabolism quickly and can move into glycolysis first."
-        )
+        return "Glucose enters central metabolism quickly and can move into glycolysis first."
     if carbon_source == "Complex carbohydrate":
-        return (
-            "Complex carbohydrates must be broken down before their components can enter central metabolism."
-        )
-    return (
-        "Mixed nutrients give the microbe flexibility because different molecules can feed into different pathways."
-    )
+        return "Complex carbohydrates must be broken down before their components can enter central metabolism."
+    return "Mixed nutrients give the microbe flexibility because different molecules can feed into different pathways."
 
 
 def compute_results(metabolism, carbon_source, nutrient_level, environment):
@@ -191,9 +182,6 @@ def custom_meter(label, value, fill_color, text_color="#183153"):
     )
 
 
-# -----------------------------
-# Styling
-# -----------------------------
 st.markdown(
     """
     <style>
@@ -202,17 +190,14 @@ st.markdown(
         color: #1a1a1a;
     }
 
-    /* General text */
     p, span, label, li {
         color: #1a1a1a !important;
     }
 
-    /* Main headings */
     h1, h2, h3, h4, h5, h6 {
         color: #183153 !important;
     }
 
-    /* Hero section */
     .hero {
         background: linear-gradient(135deg, #122b57 0%, #2d5bba 55%, #63a4ff 100%);
         padding: 2rem 2rem 1.5rem 2rem;
@@ -234,7 +219,6 @@ st.markdown(
         color: white !important;
     }
 
-    /* Cards */
     .card {
         background: rgba(255,255,255,0.94);
         border: 1px solid rgba(220,230,245,0.95);
@@ -272,13 +256,6 @@ st.markdown(
         height: 100%;
     }
 
-    .metric-label {
-        color: #51627a !important;
-        font-size: 0.95rem;
-        margin-bottom: 0.2rem;
-        font-weight: 700;
-    }
-
     .footer-note {
         font-size: 0.9rem;
         color: #526173 !important;
@@ -295,7 +272,6 @@ st.markdown(
         margin-bottom: 0.6rem;
     }
 
-    /* Sidebar */
     [data-testid="stSidebar"] {
         background: linear-gradient(180deg, #f7fbff 0%, #edf4ff 100%);
     }
@@ -304,18 +280,11 @@ st.markdown(
         color: #1a1a1a !important;
     }
 
-    /* Tabs */
     button[data-baseweb="tab"] {
         color: #183153 !important;
         font-weight: 700 !important;
     }
 
-    /* Radio/select text */
-    .stRadio label, .stSelectbox label, .stSlider label {
-        color: #1a1a1a !important;
-    }
-
-    /* Make metric labels readable */
     [data-testid="stMetricLabel"] {
         color: #183153 !important;
         font-weight: 700 !important;
@@ -330,9 +299,6 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-# -----------------------------
-# Header
-# -----------------------------
 st.markdown(
     """
     <div class="hero">
@@ -345,9 +311,6 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-# -----------------------------
-# Sidebar controls
-# -----------------------------
 st.sidebar.markdown("## ⚙️ Environment Controls")
 
 preset = st.sidebar.selectbox(
@@ -395,9 +358,6 @@ if oxygen == "Present" and electron_acceptor != "O₂ (oxygen)":
 if oxygen == "Absent" and electron_acceptor == "O₂ (oxygen)":
     st.sidebar.warning("If oxygen is absent, oxygen cannot serve as the terminal electron acceptor.")
 
-# -----------------------------
-# Normalize logic
-# -----------------------------
 effective_acceptor = electron_acceptor
 if oxygen == "Present":
     effective_acceptor = "O₂ (oxygen)"
@@ -414,9 +374,6 @@ environment = {
 metabolism = determine_metabolism(oxygen, effective_acceptor)
 results = compute_results(metabolism, carbon_source, nutrient_level, environment)
 
-# -----------------------------
-# Top metrics
-# -----------------------------
 m1, m2, m3 = st.columns(3)
 with m1:
     st.metric("Pathway", metabolism)
@@ -425,9 +382,6 @@ with m2:
 with m3:
     st.metric("Estimated Growth", f'{results["growth_score"]}%')
 
-# -----------------------------
-# Main content
-# -----------------------------
 left, middle, right = st.columns([1.05, 1.2, 1.0])
 
 with left:
@@ -448,7 +402,6 @@ with left:
     else:
         colored_tag("Fermentation mode", "#ffe0e0", "#8a1c1c")
         st.write("This bacterium has no usable external electron acceptor, so it ferments.")
-
     st.markdown('</div>', unsafe_allow_html=True)
 
 with middle:
@@ -465,15 +418,12 @@ with middle:
     st.markdown(f'<div class="pathway-box">{results["pathway"]}</div>', unsafe_allow_html=True)
 
     tab1, tab2, tab3 = st.tabs(["How it works", "Key feature", "Where it happens"])
-
     with tab1:
         st.write(results["explanation"])
         st.write(f"**Carbon source note:** {results['carbon_note']}")
-
     with tab2:
         st.write(results["key_feature"])
         st.write(results["examples"])
-
     with tab3:
         st.write(results["location"])
 
@@ -492,12 +442,8 @@ with right:
 
     st.markdown("#### 📣 Survival Feedback")
     st.write(results["survival"])
-
     st.markdown('</div>', unsafe_allow_html=True)
 
-# -----------------------------
-# Comparison section
-# -----------------------------
 st.markdown("## Compare the Major Strategies")
 
 c1, c2, c3 = st.columns(3)
@@ -537,9 +483,6 @@ for col, strategy in zip([c1, c2, c3], comparison_data.keys()):
             st.write(f"**{k}:** {v}")
         st.markdown('</div>', unsafe_allow_html=True)
 
-# -----------------------------
-# Challenge mode
-# -----------------------------
 st.markdown("## 🎯 Challenge Mode")
 
 challenge = st.radio(
@@ -559,9 +502,6 @@ if challenge is not None:
     else:
         st.error("Not quite. The best answer is oxygen present + glucose + high nutrients.")
 
-# -----------------------------
-# Footer
-# -----------------------------
 st.markdown("---")
 st.markdown(
     """
