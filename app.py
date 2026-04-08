@@ -44,10 +44,7 @@ header {
 [data-testid="stStatusWidget"] {
     display: none !important;
 }
-/* Pull app up after removing header */
-.block-container {
-    padding-top: 1rem !important;
-}
+
 git add .
 git commit -m "Final UI fixes"
 git push
