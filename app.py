@@ -6,6 +6,9 @@ st.set_page_config(
     layout="wide"
 )
 
+# -----------------------------
+# Helper logic
+# -----------------------------
 def determine_metabolism(oxygen, electron_acceptor):
     if oxygen == "Present":
         return "Aerobic Respiration"
@@ -182,6 +185,21 @@ def custom_meter(label, value, fill_color, text_color="#183153"):
     )
 
 
+def stat_card(title, value):
+    st.markdown(
+        f"""
+        <div class="stat-card">
+            <div class="stat-title">{title}</div>
+            <div class="stat-value">{value}</div>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
+
+# -----------------------------
+# Styling
+# -----------------------------
 st.markdown(
     """
     <style>
@@ -272,6 +290,31 @@ st.markdown(
         margin-bottom: 0.6rem;
     }
 
+    .stat-card {
+        background: rgba(255,255,255,0.96);
+        border: 1px solid #dfe8f5;
+        border-radius: 20px;
+        padding: 1rem 1.1rem;
+        box-shadow: 0 6px 18px rgba(20, 40, 70, 0.06);
+        margin-bottom: 1rem;
+        min-height: 108px;
+    }
+
+    .stat-title {
+        font-size: 1rem;
+        font-weight: 700;
+        color: #44566c !important;
+        margin-bottom: 0.45rem;
+    }
+
+    .stat-value {
+        font-size: 2rem;
+        font-weight: 800;
+        color: #122b57 !important;
+        line-height: 1.1;
+        word-break: break-word;
+    }
+
     [data-testid="stSidebar"] {
         background: linear-gradient(180deg, #f7fbff 0%, #edf4ff 100%);
     }
@@ -285,20 +328,55 @@ st.markdown(
         font-weight: 700 !important;
     }
 
-    [data-testid="stMetricLabel"] {
-        color: #183153 !important;
-        font-weight: 700 !important;
+    /* Fix selectbox closed field text */
+    div[data-baseweb="select"] > div {
+        background-color: #ffffff !important;
+        color: #1a1a1a !important;
+        border: 1px solid #d6e0ee !important;
+        border-radius: 12px !important;
     }
 
-    [data-testid="stMetricValue"] {
-        color: #122b57 !important;
-        font-weight: 800 !important;
+    div[data-baseweb="select"] span {
+        color: #1a1a1a !important;
+    }
+
+    div[data-baseweb="select"] svg {
+        fill: #1a1a1a !important;
+    }
+
+    /* Fix dropdown menu */
+    div[role="listbox"] {
+        background: #ffffff !important;
+        color: #1a1a1a !important;
+    }
+
+    div[role="option"] {
+        background: #ffffff !important;
+        color: #1a1a1a !important;
+    }
+
+    div[role="option"]:hover {
+        background: #eef4ff !important;
+        color: #1a1a1a !important;
+    }
+
+    /* Fix slider label area */
+    [data-testid="stTickBar"] {
+        color: #1a1a1a !important;
+    }
+
+    /* Hide default metric widgets completely in case Streamlit caches layout */
+    [data-testid="metric-container"] {
+        display: none !important;
     }
     </style>
     """,
     unsafe_allow_html=True
 )
 
+# -----------------------------
+# Header
+# -----------------------------
 st.markdown(
     """
     <div class="hero">
@@ -311,6 +389,9 @@ st.markdown(
     unsafe_allow_html=True
 )
 
+# -----------------------------
+# Sidebar controls
+# -----------------------------
 st.sidebar.markdown("## ⚙️ Environment Controls")
 
 preset = st.sidebar.selectbox(
@@ -358,6 +439,9 @@ if oxygen == "Present" and electron_acceptor != "O₂ (oxygen)":
 if oxygen == "Absent" and electron_acceptor == "O₂ (oxygen)":
     st.sidebar.warning("If oxygen is absent, oxygen cannot serve as the terminal electron acceptor.")
 
+# -----------------------------
+# Normalize logic
+# -----------------------------
 effective_acceptor = electron_acceptor
 if oxygen == "Present":
     effective_acceptor = "O₂ (oxygen)"
@@ -374,14 +458,20 @@ environment = {
 metabolism = determine_metabolism(oxygen, effective_acceptor)
 results = compute_results(metabolism, carbon_source, nutrient_level, environment)
 
+# -----------------------------
+# Top stat cards
+# -----------------------------
 m1, m2, m3 = st.columns(3)
 with m1:
-    st.metric("Pathway", metabolism)
+    stat_card("Pathway", metabolism)
 with m2:
-    st.metric("ATP Yield", results["atp_label"])
+    stat_card("ATP Yield", results["atp_label"])
 with m3:
-    st.metric("Estimated Growth", f'{results["growth_score"]}%')
+    stat_card("Estimated Growth", f'{results["growth_score"]}%')
 
+# -----------------------------
+# Main content
+# -----------------------------
 left, middle, right = st.columns([1.05, 1.2, 1.0])
 
 with left:
@@ -444,6 +534,9 @@ with right:
     st.write(results["survival"])
     st.markdown('</div>', unsafe_allow_html=True)
 
+# -----------------------------
+# Comparison section
+# -----------------------------
 st.markdown("## Compare the Major Strategies")
 
 c1, c2, c3 = st.columns(3)
@@ -483,6 +576,9 @@ for col, strategy in zip([c1, c2, c3], comparison_data.keys()):
             st.write(f"**{k}:** {v}")
         st.markdown('</div>', unsafe_allow_html=True)
 
+# -----------------------------
+# Challenge mode
+# -----------------------------
 st.markdown("## 🎯 Challenge Mode")
 
 challenge = st.radio(
@@ -502,6 +598,9 @@ if challenge is not None:
     else:
         st.error("Not quite. The best answer is oxygen present + glucose + high nutrients.")
 
+# -----------------------------
+# Footer
+# -----------------------------
 st.markdown("---")
 st.markdown(
     """
