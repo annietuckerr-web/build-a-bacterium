@@ -143,62 +143,22 @@ def preset_environment(choice):
 
 
 def colored_tag(text, bg, color):
-    st.markdown("""
-<style>
-
-/* FORCE ALL TEXT TO BE DARK */
-html, body, [class*="css"] {
-    color: #1a1a1a !important;
-}
-
-/* Fix main app background */
-.stApp {
-    background: linear-gradient(180deg, #f8fbff 0%, #eef4ff 100%);
-    color: #1a1a1a;
-}
-
-/* Fix ALL text elements */
-h1, h2, h3, h4, h5, h6, p, span, div, label {
-    color: #1a1a1a !important;
-}
-
-/* Fix sidebar text */
-[data-testid="stSidebar"] * {
-    color: #1a1a1a !important;
-}
-
-/* Fix cards */
-.card, .mini-card {
-    color: #1a1a1a !important;
-}
-
-/* Fix pathway box */
-.pathway-box {
-    color: #15325b !important;
-}
-
-/* Fix metric labels */
-.metric-label {
-    color: #51627a !important;
-}
-
-/* Fix buttons and widgets */
-button, input, textarea {
-    color: #1a1a1a !important;
-}
-
-/* Optional: make headings slightly darker */
-.section-title {
-    color: #122b57 !important;
-}
-
-/* Sidebar background */
-[data-testid="stSidebar"] {
-    background: linear-gradient(180deg, #f7fbff 0%, #edf4ff 100%);
-}
-
-</style>
-""", unsafe_allow_html=True)
+    st.markdown(
+        f"""
+        <div style="
+            display:inline-block;
+            padding:0.35rem 0.75rem;
+            border-radius:999px;
+            background:{bg};
+            color:{color};
+            font-weight:700;
+            font-size:0.95rem;
+            margin-bottom:0.8rem;">
+            {text}
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
 
 
 def custom_meter(label, value, fill_color, text_color="#183153"):
@@ -431,42 +391,59 @@ st.markdown(
         font-weight: 700 !important;
     }
 
-    /* Dropdowns / selectboxes */
-    div[data-baseweb="select"] > div {
-        background: #ffffff !important;
-        color: #1a1a1a !important;
-        border: 1px solid #d6e0ee !important;
-        border-radius: 12px !important;
-        min-height: 44px !important;
-    }
+   /* FORCE dropdown menu to be white */
+div[data-baseweb="popover"] {
+    background: white !important;
+}
 
-    div[data-baseweb="select"] span {
-        color: #1a1a1a !important;
-    }
+div[data-baseweb="menu"] {
+    background: white !important;
+}
 
-    div[data-baseweb="select"] input {
-        color: #1a1a1a !important;
-    }
+div[role="listbox"] {
+    background: white !important;
+    color: black !important;
+    border: 1px solid #d6e0ee !important;
+}
 
-    div[data-baseweb="select"] svg {
-        fill: #1a1a1a !important;
-    }
+/* Individual dropdown options */
+div[role="option"] {
+    background: white !important;
+    color: black !important;
+}
 
-    div[role="listbox"] {
-        background: #ffffff !important;
-        color: #1a1a1a !important;
-        border: 1px solid #d6e0ee !important;
-    }
+/* Hover effect */
+div[role="option"]:hover {
+    background: #fff7ed !important;
+    color: black !important;
+}
 
-    div[role="option"] {
-        background: #ffffff !important;
-        color: #1a1a1a !important;
-    }
+/* Selected item highlight */
+div[aria-selected="true"] {
+    background: #e0ecff !important;
+    color: black !important;
+}
+/* REMOVE STREAMLIT TOP BLACK BAR */
+header {
+    visibility: hidden;
+}
 
-    div[role="option"]:hover {
-        background: #fff7ed !important;
-        color: #1a1a1a !important;
-    }
+[data-testid="stToolbar"] {
+    display: none !important;
+}
+
+[data-testid="stDecoration"] {
+    display: none !important;
+}
+
+[data-testid="stStatusWidget"] {
+    display: none !important;
+}
+/* Pull app up after removing header */
+.block-container {
+    padding-top: 1rem !important;
+}
+
 
     /* Radio options: blue outline / white center, orange on hover */
     div[role="radiogroup"] label {
