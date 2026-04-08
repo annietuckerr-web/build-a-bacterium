@@ -143,7 +143,7 @@ def preset_environment(choice):
 
 
 def colored_tag(text, bg, color):
-st.markdown("""
+    st.markdown("""
 <style>
 
 /* FORCE ALL TEXT TO BE DARK */
