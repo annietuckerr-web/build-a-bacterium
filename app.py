@@ -28,22 +28,6 @@ st.markdown("""
     }
     </style>
     """, unsafe_allow_html=True)
-/* REMOVE STREAMLIT TOP BLACK BAR */
-header {
-    visibility: hidden;
-}
-
-[data-testid="stToolbar"] {
-    display: none !important;
-}
-
-[data-testid="stDecoration"] {
-    display: none !important;
-}
-
-[data-testid="stStatusWidget"] {
-    display: none !important;
-}
 
 git add .
 git commit -m "Final UI fixes"
