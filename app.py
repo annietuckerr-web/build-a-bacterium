@@ -1,3 +1,4 @@
+import random
 import streamlit as st
 
 st.set_page_config(
@@ -197,6 +198,69 @@ def stat_card(title, value):
     )
 
 
+comparison_data = {
+    "Fermentation": {
+        "ATP yield": "Low",
+        "Needs oxygen?": "No",
+        "Uses ETS?": "No",
+        "Terminal acceptor": "Internal organic molecule",
+        "ATP method": "Substrate-level phosphorylation",
+        "Summary": "Simple, fast, and wasteful"
+    },
+    "Aerobic Respiration": {
+        "ATP yield": "High",
+        "Needs oxygen?": "Yes",
+        "Uses ETS?": "Yes",
+        "Terminal acceptor": "O₂",
+        "ATP method": "Proton motive force / oxidative phosphorylation",
+        "Summary": "Most efficient in this simulator"
+    },
+    "Anaerobic Respiration": {
+        "ATP yield": "Medium",
+        "Needs oxygen?": "No",
+        "Uses ETS?": "Yes",
+        "Terminal acceptor": "Nitrate, sulfate, TMAO, etc.",
+        "ATP method": "Proton motive force / oxidative phosphorylation",
+        "Summary": "Flexible in low-oxygen environments"
+    }
+}
+
+challenge_bank = [
+    {
+        "question": "Which condition should produce the fastest growth in this simulator?",
+        "choices": [
+            "No oxygen + no electron acceptor + low nutrients",
+            "Oxygen present + glucose + high nutrients",
+            "No oxygen + sulfate + low nutrients",
+            "No oxygen + none + medium nutrients"
+        ],
+        "answer": "Oxygen present + glucose + high nutrients",
+        "explanation": "Aerobic respiration with abundant nutrients is modeled as the most energy-efficient condition."
+    },
+    {
+        "question": "Which setup is most likely to lead to fermentation?",
+        "choices": [
+            "Oxygen absent + no external electron acceptor",
+            "Oxygen present + glucose",
+            "Oxygen absent + nitrate available",
+            "Oxygen present + sulfate available"
+        ],
+        "answer": "Oxygen absent + no external electron acceptor",
+        "explanation": "Fermentation happens here because there is no usable external terminal electron acceptor."
+    },
+    {
+        "question": "Which pathway in this simulator uses a proton motive force?",
+        "choices": [
+            "Fermentation only",
+            "Aerobic respiration only",
+            "Aerobic and anaerobic respiration",
+            "None of them"
+        ],
+        "answer": "Aerobic and anaerobic respiration",
+        "explanation": "Both forms of respiration use an electron transport system and proton motive force."
+    },
+]
+
 # -----------------------------
 # Styling
 # -----------------------------
@@ -328,44 +392,20 @@ st.markdown(
         font-weight: 700 !important;
     }
 
-    /* Fix selectbox closed field text */
-    div[data-baseweb="select"] > div {
-        background-color: #ffffff !important;
+    div[role="radiogroup"] label {
+        background: white;
+        border: 1px solid #d9e3f0;
+        padding: 0.35rem 0.55rem;
+        border-radius: 12px;
+        margin-bottom: 0.35rem;
+    }
+
+    div[role="radiogroup"] label p {
         color: #1a1a1a !important;
-        border: 1px solid #d6e0ee !important;
-        border-radius: 12px !important;
+        font-weight: 500;
     }
 
-    div[data-baseweb="select"] span {
-        color: #1a1a1a !important;
-    }
-
-    div[data-baseweb="select"] svg {
-        fill: #1a1a1a !important;
-    }
-
-    /* Fix dropdown menu */
-    div[role="listbox"] {
-        background: #ffffff !important;
-        color: #1a1a1a !important;
-    }
-
-    div[role="option"] {
-        background: #ffffff !important;
-        color: #1a1a1a !important;
-    }
-
-    div[role="option"]:hover {
-        background: #eef4ff !important;
-        color: #1a1a1a !important;
-    }
-
-    /* Fix slider label area */
-    [data-testid="stTickBar"] {
-        color: #1a1a1a !important;
-    }
-
-    /* Hide default metric widgets completely in case Streamlit caches layout */
+    /* hide any leftover metric widgets */
     [data-testid="metric-container"] {
         display: none !important;
     }
@@ -394,9 +434,10 @@ st.markdown(
 # -----------------------------
 st.sidebar.markdown("## ⚙️ Environment Controls")
 
-preset = st.sidebar.selectbox(
+preset = st.sidebar.radio(
     "Real-world preset",
-    ["Custom", "Human gut", "Wetland soil", "Surface ocean"]
+    ["Custom", "Human gut", "Wetland soil", "Surface ocean"],
+    index=0
 )
 
 preset_values = preset_environment(preset) if preset != "Custom" else None
@@ -408,14 +449,14 @@ oxygen = st.sidebar.radio(
 )
 
 electron_options = ["O₂ (oxygen)", "Nitrate (NO₃⁻)", "Sulfate (SO₄²⁻)", "TMAO", "None"]
-electron_acceptor = st.sidebar.selectbox(
+electron_acceptor = st.sidebar.radio(
     "⚡ Terminal electron acceptor",
     electron_options,
     index=0 if preset_values is None else electron_options.index(preset_values["electron_acceptor"])
 )
 
 carbon_options = ["Glucose", "Complex carbohydrate", "Mixed nutrients"]
-carbon_source = st.sidebar.selectbox(
+carbon_source = st.sidebar.radio(
     "🍞 Carbon source",
     carbon_options,
     index=0 if preset_values is None else carbon_options.index(preset_values["carbon_source"])
@@ -535,68 +576,53 @@ with right:
     st.markdown('</div>', unsafe_allow_html=True)
 
 # -----------------------------
-# Comparison section
+# Interactive comparison section
 # -----------------------------
 st.markdown("## Compare the Major Strategies")
 
-c1, c2, c3 = st.columns(3)
+compare_left, compare_right = st.columns(2)
+with compare_left:
+    strategy_a = st.selectbox("Choose strategy A", list(comparison_data.keys()), index=0)
+with compare_right:
+    strategy_b = st.selectbox("Choose strategy B", list(comparison_data.keys()), index=1)
 
-comparison_data = {
-    "Fermentation": {
-        "ATP yield": "Low",
-        "Needs oxygen?": "No",
-        "Uses ETS?": "No",
-        "Terminal acceptor": "Internal organic molecule",
-        "ATP method": "Substrate-level phosphorylation",
-        "Summary": "Simple, fast, and wasteful"
-    },
-    "Aerobic Respiration": {
-        "ATP yield": "High",
-        "Needs oxygen?": "Yes",
-        "Uses ETS?": "Yes",
-        "Terminal acceptor": "O₂",
-        "ATP method": "Proton motive force / oxidative phosphorylation",
-        "Summary": "Most efficient in this simulator"
-    },
-    "Anaerobic Respiration": {
-        "ATP yield": "Medium",
-        "Needs oxygen?": "No",
-        "Uses ETS?": "Yes",
-        "Terminal acceptor": "Nitrate, sulfate, TMAO, etc.",
-        "ATP method": "Proton motive force / oxidative phosphorylation",
-        "Summary": "Flexible in low-oxygen environments"
-    }
-}
+col_a, col_b = st.columns(2)
+with col_a:
+    st.markdown('<div class="mini-card">', unsafe_allow_html=True)
+    st.markdown(f'<div class="comparison-title">{strategy_a}</div>', unsafe_allow_html=True)
+    for k, v in comparison_data[strategy_a].items():
+        st.write(f"**{k}:** {v}")
+    st.markdown('</div>', unsafe_allow_html=True)
 
-for col, strategy in zip([c1, c2, c3], comparison_data.keys()):
-    with col:
-        st.markdown('<div class="mini-card">', unsafe_allow_html=True)
-        st.markdown(f'<div class="comparison-title">{strategy}</div>', unsafe_allow_html=True)
-        for k, v in comparison_data[strategy].items():
-            st.write(f"**{k}:** {v}")
-        st.markdown('</div>', unsafe_allow_html=True)
+with col_b:
+    st.markdown('<div class="mini-card">', unsafe_allow_html=True)
+    st.markdown(f'<div class="comparison-title">{strategy_b}</div>', unsafe_allow_html=True)
+    for k, v in comparison_data[strategy_b].items():
+        st.write(f"**{k}:** {v}")
+    st.markdown('</div>', unsafe_allow_html=True)
 
 # -----------------------------
 # Challenge mode
 # -----------------------------
 st.markdown("## 🎯 Challenge Mode")
 
-challenge = st.radio(
-    "Which condition should produce the fastest growth in this simulator?",
-    [
-        "No oxygen + no electron acceptor + low nutrients",
-        "Oxygen present + glucose + high nutrients",
-        "No oxygen + sulfate + low nutrients",
-        "No oxygen + none + medium nutrients"
-    ],
-    index=None
-)
+if "challenge_index" not in st.session_state:
+    st.session_state.challenge_index = 0
 
-if challenge is not None:
-    if challenge == "Oxygen present + glucose + high nutrients":
-        st.success("Correct! In this simulator, aerobic respiration with abundant nutrients gives the highest ATP yield and fastest growth.")
+challenge = challenge_bank[st.session_state.challenge_index]
+
+st.write(f"**{challenge['question']}**")
+answer = st.radio("Choose your answer:", challenge["choices"], index=None, key=f"challenge_{st.session_state.challenge_index}")
+
+if answer is not None:
+    if answer == challenge["answer"]:
+        st.success(f"Correct! {challenge['explanation']}")
     else:
-        st.error("Not quite. The best answer is oxygen present + glucose + high nutrients.")
+        st.error(f"Not quite. {challenge['explanation']}")
+
+if st.button("Load a new challenge"):
+    st.session_state.challenge_index = (st.session_state.challenge_index + 1) % len(challenge_bank)
+    st.rerun()
 
 # -----------------------------
 # Footer
