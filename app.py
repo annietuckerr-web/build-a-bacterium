@@ -716,3 +716,7 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
+git add .
+git commit -m "Final UI fixes"
+git push
+
