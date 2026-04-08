@@ -391,7 +391,7 @@ st.markdown(
         font-weight: 700 !important;
     }
 
-   /* FORCE dropdown menu to be white */
+/* FORCE dropdown menu to be white */
 div[data-baseweb="popover"] {
     background: white !important;
 }
@@ -402,26 +402,26 @@ div[data-baseweb="menu"] {
 
 div[role="listbox"] {
     background: white !important;
-    color: black !important;
+    color: blue !important;
     border: 1px solid #d6e0ee !important;
 }
 
 /* Individual dropdown options */
 div[role="option"] {
     background: white !important;
-    color: black !important;
+    color: blue !important;
 }
 
 /* Hover effect */
 div[role="option"]:hover {
     background: #fff7ed !important;
-    color: black !important;
+    color: blue !important;
 }
 
 /* Selected item highlight */
 div[aria-selected="true"] {
     background: #e0ecff !important;
-    color: black !important;
+    color: blue !important;
 }
 /* REMOVE STREAMLIT TOP BLACK BAR */
 header {
@@ -443,8 +443,6 @@ header {
 .block-container {
     padding-top: 1rem !important;
 }
-
-
     /* Radio options: blue outline / white center, orange on hover */
     div[role="radiogroup"] label {
         background: #ffffff !important;
