@@ -391,58 +391,43 @@ st.markdown(
         font-weight: 700 !important;
     }
 
-/* FORCE dropdown menu to be white */
-div[data-baseweb="popover"] {
-    background: blue !important;
-}
+    /* Dropdowns / selectboxes */
+    div[data-baseweb="select"] > div {
+        background: blue !important;
+        color: white !important;
+        border: 1px solid #d6e0ee !important;
+        border-radius: 12px !important;
+        min-height: 44px !important;
+    }
 
-div[data-baseweb="menu"] {
-    background: blue !important;
-}
+    div[data-baseweb="select"] span {
+        color: white !important;
+    }
 
-div[role="listbox"] {
-    background: blue !important;
-    color: white !important;
-    border: 1px solid #d6e0ee !important;
-}
+    div[data-baseweb="select"] input {
+        color: white !important;
+    }
 
-/* Individual dropdown options */
-div[role="option"] {
-    background: blue !important;
-    color: white !important;
-}
+    div[data-baseweb="select"] svg {
+        fill: white !important;
+    }
 
-/* Hover effect */
-div[role="option"]:hover {
-    background: #fff7ed !important;
-    color: white !important;
-}
+    div[role="listbox"] {
+        background: blue !important;
+        color: white !important;
+        border: 1px solid #d6e0ee !important;
+    }
 
-/* Selected item highlight */
-div[aria-selected="true"] {
-    background: #e0ecff !important;
-    color: white !important;
-}
-/* REMOVE STREAMLIT TOP BLACK BAR */
-header {
-    visibility: hidden;
-}
+    div[role="option"] {
+        background: blue !important;
+        color: white !important;
+    }
 
-[data-testid="stToolbar"] {
-    display: none !important;
-}
+    div[role="option"]:hover {
+        background: orange !important;
+        color: white !important;
+    }
 
-[data-testid="stDecoration"] {
-    display: none !important;
-}
-
-[data-testid="stStatusWidget"] {
-    display: none !important;
-}
-/* Pull app up after removing header */
-.block-container {
-    padding-top: 1rem !important;
-}
     /* Radio options: blue outline / white center, orange on hover */
     div[role="radiogroup"] label {
         background: #ffffff !important;
