@@ -173,15 +173,28 @@ def colored_tag(text, bg, color):
 st.markdown(
     """
     <style>
-    .stApp {
-        background: linear-gradient(180deg, #f8fbff 0%, #eef4ff 100%);
+    /* FORCE ALL TEXT TO BE DARK */
+    html, body, [class*="css"] {
+        color: #1a1a1a !important;
     }
 
+    /* Main app background */
+    .stApp {
+        background: linear-gradient(180deg, #f8fbff 0%, #eef4ff 100%);
+        color: #1a1a1a !important;
+    }
+
+    /* Fix general text */
+    h1, h2, h3, h4, h5, h6, p, span, div, label, li {
+        color: #1a1a1a !important;
+    }
+
+    /* Hero section */
     .hero {
         background: linear-gradient(135deg, #122b57 0%, #2d5bba 55%, #63a4ff 100%);
         padding: 2rem 2rem 1.5rem 2rem;
         border-radius: 24px;
-        color: white;
+        color: white !important;
         margin-bottom: 1.25rem;
         box-shadow: 0 10px 30px rgba(18, 43, 87, 0.18);
     }
@@ -190,28 +203,32 @@ st.markdown(
         font-size: 2.3rem;
         font-weight: 800;
         margin-bottom: 0.2rem;
+        color: white !important;
     }
 
     .hero-subtitle {
         font-size: 1.05rem;
         opacity: 0.95;
+        color: white !important;
     }
 
+    /* Cards */
     .card {
-        background: rgba(255,255,255,0.88);
-        border: 1px solid rgba(255,255,255,0.7);
+        background: rgba(255,255,255,0.92);
+        border: 1px solid rgba(220,230,245,0.95);
         backdrop-filter: blur(10px);
         padding: 1.15rem;
         border-radius: 22px;
         box-shadow: 0 8px 24px rgba(40, 60, 100, 0.08);
         margin-bottom: 1rem;
+        color: #1a1a1a !important;
     }
 
     .section-title {
         font-size: 1.2rem;
         font-weight: 800;
         margin-bottom: 0.75rem;
-        color: #183153;
+        color: #183153 !important;
     }
 
     .pathway-box {
@@ -223,7 +240,7 @@ st.markdown(
         font-size: 1.05rem;
         font-weight: 600;
         margin: 0.5rem 0 0.9rem 0;
-        color: #15325b;
+        color: #15325b !important;
     }
 
     .mini-card {
@@ -233,10 +250,11 @@ st.markdown(
         padding: 1rem;
         box-shadow: 0 6px 18px rgba(20, 40, 70, 0.05);
         height: 100%;
+        color: #1a1a1a !important;
     }
 
     .metric-label {
-        color: #51627a;
+        color: #51627a !important;
         font-size: 0.95rem;
         margin-bottom: 0.2rem;
     }
@@ -244,14 +262,14 @@ st.markdown(
     .metric-value {
         font-size: 2rem;
         font-weight: 800;
-        color: #122b57;
+        color: #122b57 !important;
         margin-bottom: 0.5rem;
     }
 
     .footer-note {
         font-size: 0.9rem;
-        color: #526173;
-        background: rgba(255,255,255,0.7);
+        color: #526173 !important;
+        background: rgba(255,255,255,0.85);
         border: 1px solid #e3ebf7;
         padding: 1rem;
         border-radius: 16px;
@@ -260,12 +278,26 @@ st.markdown(
     .comparison-title {
         font-size: 1.1rem;
         font-weight: 800;
-        color: #183153;
+        color: #183153 !important;
         margin-bottom: 0.6rem;
     }
 
+    /* Sidebar */
     [data-testid="stSidebar"] {
         background: linear-gradient(180deg, #f7fbff 0%, #edf4ff 100%);
+    }
+
+    [data-testid="stSidebar"] * {
+        color: #1a1a1a !important;
+    }
+
+    /* Streamlit widgets */
+    button, input, textarea, select {
+        color: #1a1a1a !important;
+    }
+
+    .stRadio label, .stSelectbox label, .stSlider label {
+        color: #1a1a1a !important;
     }
 
     .stProgress > div > div > div > div {
