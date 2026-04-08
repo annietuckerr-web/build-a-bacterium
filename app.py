@@ -5,13 +5,6 @@ st.set_page_config(
     page_icon="🦠",
     layout="wide"
 )
-
-[theme]
-primaryColor = "#F63366"
-backgroundColor = "#FFFFFF"
-secondaryBackgroundColor = "#F0F2F6"  # Light gray background for dropdowns
-textColor = "#262730"
-font = "sans serif"
 import streamlit as st
 
 st.markdown("""
@@ -35,6 +28,29 @@ st.markdown("""
     }
     </style>
     """, unsafe_allow_html=True)
+/* REMOVE STREAMLIT TOP BLACK BAR */
+header {
+    visibility: hidden;
+}
+
+[data-testid="stToolbar"] {
+    display: none !important;
+}
+
+[data-testid="stDecoration"] {
+    display: none !important;
+}
+
+[data-testid="stStatusWidget"] {
+    display: none !important;
+}
+/* Pull app up after removing header */
+.block-container {
+    padding-top: 1rem !important;
+}
+git add .
+git commit -m "Final UI fixes"
+git push
 
 # -----------------------------
 # Helper logic
