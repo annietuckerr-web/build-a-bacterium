@@ -1,4 +1,3 @@
-import random
 import streamlit as st
 
 st.set_page_config(
@@ -281,11 +280,11 @@ st.markdown(
     }
 
     .hero {
-        background: linear-gradient(135deg, #122b57 0%, #2d5bba 55%, #63a4ff 100%);
+        background: linear-gradient(135deg, #1d4ed8 0%, #3b82f6 55%, #f59e0b 100%);
         padding: 2rem 2rem 1.5rem 2rem;
         border-radius: 24px;
-        margin-bottom: 1.25rem;
-        box-shadow: 0 10px 30px rgba(18, 43, 87, 0.18);
+        margin-bottom: 1.0rem;
+        box-shadow: 0 10px 30px rgba(29, 78, 216, 0.18);
     }
 
     .hero-title {
@@ -297,12 +296,12 @@ st.markdown(
 
     .hero-subtitle {
         font-size: 1.05rem;
-        opacity: 0.95;
+        opacity: 0.97;
         color: white !important;
     }
 
     .card {
-        background: rgba(255,255,255,0.94);
+        background: rgba(255,255,255,0.96);
         border: 1px solid rgba(220,230,245,0.95);
         padding: 1.15rem;
         border-radius: 22px;
@@ -320,7 +319,7 @@ st.markdown(
     .pathway-box {
         background: linear-gradient(135deg, #f5f9ff 0%, #ecf3ff 100%);
         border: 1px solid #dce8ff;
-        border-left: 7px solid #2d5bba;
+        border-left: 7px solid #2563eb;
         padding: 1rem;
         border-radius: 16px;
         font-size: 1.05rem;
@@ -341,7 +340,7 @@ st.markdown(
     .footer-note {
         font-size: 0.9rem;
         color: #526173 !important;
-        background: rgba(255,255,255,0.85);
+        background: rgba(255,255,255,0.88);
         border: 1px solid #e3ebf7;
         padding: 1rem;
         border-radius: 16px;
@@ -355,12 +354,12 @@ st.markdown(
     }
 
     .stat-card {
-        background: rgba(255,255,255,0.96);
+        background: rgba(255,255,255,0.98);
         border: 1px solid #dfe8f5;
         border-radius: 20px;
         padding: 1rem 1.1rem;
         box-shadow: 0 6px 18px rgba(20, 40, 70, 0.06);
-        margin-bottom: 1rem;
+        margin-bottom: 0.5rem;
         min-height: 108px;
     }
 
@@ -392,12 +391,56 @@ st.markdown(
         font-weight: 700 !important;
     }
 
+    /* Dropdowns / selectboxes */
+    div[data-baseweb="select"] > div {
+        background: #ffffff !important;
+        color: #1a1a1a !important;
+        border: 1px solid #d6e0ee !important;
+        border-radius: 12px !important;
+        min-height: 44px !important;
+    }
+
+    div[data-baseweb="select"] span {
+        color: #1a1a1a !important;
+    }
+
+    div[data-baseweb="select"] input {
+        color: #1a1a1a !important;
+    }
+
+    div[data-baseweb="select"] svg {
+        fill: #1a1a1a !important;
+    }
+
+    div[role="listbox"] {
+        background: #ffffff !important;
+        color: #1a1a1a !important;
+        border: 1px solid #d6e0ee !important;
+    }
+
+    div[role="option"] {
+        background: #ffffff !important;
+        color: #1a1a1a !important;
+    }
+
+    div[role="option"]:hover {
+        background: #fff7ed !important;
+        color: #1a1a1a !important;
+    }
+
+    /* Radio options: blue outline / white center, orange on hover */
     div[role="radiogroup"] label {
-        background: white;
-        border: 1px solid #d9e3f0;
-        padding: 0.35rem 0.55rem;
-        border-radius: 12px;
-        margin-bottom: 0.35rem;
+        background: #ffffff !important;
+        border: 2px solid #60a5fa !important;
+        padding: 0.35rem 0.6rem;
+        border-radius: 14px;
+        margin-bottom: 0.45rem;
+        transition: all 0.2s ease;
+    }
+
+    div[role="radiogroup"] label:hover {
+        border-color: #f59e0b !important;
+        background: #fffaf0 !important;
     }
 
     div[role="radiogroup"] label p {
@@ -405,7 +448,38 @@ st.markdown(
         font-weight: 500;
     }
 
-    /* hide any leftover metric widgets */
+    /* Button styling */
+    .stButton > button {
+        background: #ffffff !important;
+        color: #1d4ed8 !important;
+        border: 2px solid #60a5fa !important;
+        border-radius: 14px !important;
+        font-weight: 700 !important;
+        padding: 0.45rem 1rem !important;
+        box-shadow: 0 3px 8px rgba(29, 78, 216, 0.10);
+    }
+
+    .stButton > button:hover {
+        background: #fffaf0 !important;
+        color: #b45309 !important;
+        border-color: #f59e0b !important;
+    }
+
+    .stButton > button:active {
+        background: #fff7ed !important;
+        color: #b45309 !important;
+        border-color: #f59e0b !important;
+    }
+
+    /* Remove extra vertical spacing that creates blank oval-looking gaps */
+    div.block-container {
+        padding-top: 1rem !important;
+    }
+
+    .element-container:has([data-testid="stMetric"]) {
+        display: none !important;
+    }
+
     [data-testid="metric-container"] {
         display: none !important;
     }
@@ -434,7 +508,7 @@ st.markdown(
 # -----------------------------
 st.sidebar.markdown("## ⚙️ Environment Controls")
 
-preset = st.sidebar.radio(
+preset = st.sidebar.selectbox(
     "Real-world preset",
     ["Custom", "Human gut", "Wetland soil", "Surface ocean"],
     index=0
@@ -442,21 +516,21 @@ preset = st.sidebar.radio(
 
 preset_values = preset_environment(preset) if preset != "Custom" else None
 
-oxygen = st.sidebar.radio(
+oxygen = st.sidebar.selectbox(
     "🫁 Oxygen level",
     ["Present", "Absent"],
     index=0 if preset_values is None else ["Present", "Absent"].index(preset_values["oxygen"])
 )
 
 electron_options = ["O₂ (oxygen)", "Nitrate (NO₃⁻)", "Sulfate (SO₄²⁻)", "TMAO", "None"]
-electron_acceptor = st.sidebar.radio(
+electron_acceptor = st.sidebar.selectbox(
     "⚡ Terminal electron acceptor",
     electron_options,
     index=0 if preset_values is None else electron_options.index(preset_values["electron_acceptor"])
 )
 
 carbon_options = ["Glucose", "Complex carbohydrate", "Mixed nutrients"]
-carbon_source = st.sidebar.radio(
+carbon_source = st.sidebar.selectbox(
     "🍞 Carbon source",
     carbon_options,
     index=0 if preset_values is None else carbon_options.index(preset_values["carbon_source"])
@@ -612,7 +686,12 @@ if "challenge_index" not in st.session_state:
 challenge = challenge_bank[st.session_state.challenge_index]
 
 st.write(f"**{challenge['question']}**")
-answer = st.radio("Choose your answer:", challenge["choices"], index=None, key=f"challenge_{st.session_state.challenge_index}")
+answer = st.radio(
+    "Choose your answer:",
+    challenge["choices"],
+    index=None,
+    key=f"challenge_{st.session_state.challenge_index}"
+)
 
 if answer is not None:
     if answer == challenge["answer"]:
@@ -620,7 +699,7 @@ if answer is not None:
     else:
         st.error(f"Not quite. {challenge['explanation']}")
 
-if st.button("Load a new challenge"):
+if st.button("Load New Challenge"):
     st.session_state.challenge_index = (st.session_state.challenge_index + 1) % len(challenge_bank)
     st.rerun()
 
