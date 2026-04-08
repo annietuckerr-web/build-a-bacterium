@@ -5,6 +5,7 @@ st.set_page_config(
     page_icon="🦠",
     layout="wide"
 )
+
 [theme]
 primaryColor = "#F63366"
 backgroundColor = "#FFFFFF"
