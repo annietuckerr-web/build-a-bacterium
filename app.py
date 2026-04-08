@@ -143,22 +143,62 @@ def preset_environment(choice):
 
 
 def colored_tag(text, bg, color):
-    st.markdown(
-        f"""
-        <div style="
-            display:inline-block;
-            padding:0.35rem 0.75rem;
-            border-radius:999px;
-            background:{bg};
-            color:{color};
-            font-weight:700;
-            font-size:0.95rem;
-            margin-bottom:0.8rem;">
-            {text}
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
+st.markdown("""
+<style>
+
+/* FORCE ALL TEXT TO BE DARK */
+html, body, [class*="css"] {
+    color: #1a1a1a !important;
+}
+
+/* Fix main app background */
+.stApp {
+    background: linear-gradient(180deg, #f8fbff 0%, #eef4ff 100%);
+    color: #1a1a1a;
+}
+
+/* Fix ALL text elements */
+h1, h2, h3, h4, h5, h6, p, span, div, label {
+    color: #1a1a1a !important;
+}
+
+/* Fix sidebar text */
+[data-testid="stSidebar"] * {
+    color: #1a1a1a !important;
+}
+
+/* Fix cards */
+.card, .mini-card {
+    color: #1a1a1a !important;
+}
+
+/* Fix pathway box */
+.pathway-box {
+    color: #15325b !important;
+}
+
+/* Fix metric labels */
+.metric-label {
+    color: #51627a !important;
+}
+
+/* Fix buttons and widgets */
+button, input, textarea {
+    color: #1a1a1a !important;
+}
+
+/* Optional: make headings slightly darker */
+.section-title {
+    color: #122b57 !important;
+}
+
+/* Sidebar background */
+[data-testid="stSidebar"] {
+    background: linear-gradient(180deg, #f7fbff 0%, #edf4ff 100%);
+}
+
+</style>
+""", unsafe_allow_html=True)
 
 
 def custom_meter(label, value, fill_color, text_color="#183153"):
