@@ -167,26 +167,49 @@ def colored_tag(text, bg, color):
     )
 
 
+def custom_meter(label, value, fill_color, text_color="#183153"):
+    st.markdown(
+        f"""
+        <div style="margin-bottom:0.35rem; font-weight:700; color:{text_color};">{label}</div>
+        <div style="
+            width:100%;
+            height:10px;
+            background:#e7edf7;
+            border-radius:999px;
+            overflow:hidden;
+            margin-bottom:0.9rem;
+            border:1px solid #d7e1f0;">
+            <div style="
+                width:{max(0, min(value, 100))}%;
+                height:100%;
+                background:{fill_color};
+                border-radius:999px;">
+            </div>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
+
 # -----------------------------
 # Styling
 # -----------------------------
 st.markdown(
     """
     <style>
-    /* FORCE ALL TEXT TO BE DARK */
-    html, body, [class*="css"] {
-        color: #1a1a1a !important;
-    }
-
-    /* Main app background */
     .stApp {
         background: linear-gradient(180deg, #f8fbff 0%, #eef4ff 100%);
+        color: #1a1a1a;
+    }
+
+    /* General text */
+    p, span, label, li {
         color: #1a1a1a !important;
     }
 
-    /* Fix general text */
-    h1, h2, h3, h4, h5, h6, p, span, div, label, li {
-        color: #1a1a1a !important;
+    /* Main headings */
+    h1, h2, h3, h4, h5, h6 {
+        color: #183153 !important;
     }
 
     /* Hero section */
@@ -194,7 +217,6 @@ st.markdown(
         background: linear-gradient(135deg, #122b57 0%, #2d5bba 55%, #63a4ff 100%);
         padding: 2rem 2rem 1.5rem 2rem;
         border-radius: 24px;
-        color: white !important;
         margin-bottom: 1.25rem;
         box-shadow: 0 10px 30px rgba(18, 43, 87, 0.18);
     }
@@ -214,14 +236,12 @@ st.markdown(
 
     /* Cards */
     .card {
-        background: rgba(255,255,255,0.92);
+        background: rgba(255,255,255,0.94);
         border: 1px solid rgba(220,230,245,0.95);
-        backdrop-filter: blur(10px);
         padding: 1.15rem;
         border-radius: 22px;
         box-shadow: 0 8px 24px rgba(40, 60, 100, 0.08);
         margin-bottom: 1rem;
-        color: #1a1a1a !important;
     }
 
     .section-title {
@@ -250,20 +270,13 @@ st.markdown(
         padding: 1rem;
         box-shadow: 0 6px 18px rgba(20, 40, 70, 0.05);
         height: 100%;
-        color: #1a1a1a !important;
     }
 
     .metric-label {
         color: #51627a !important;
         font-size: 0.95rem;
         margin-bottom: 0.2rem;
-    }
-
-    .metric-value {
-        font-size: 2rem;
-        font-weight: 800;
-        color: #122b57 !important;
-        margin-bottom: 0.5rem;
+        font-weight: 700;
     }
 
     .footer-note {
@@ -291,17 +304,26 @@ st.markdown(
         color: #1a1a1a !important;
     }
 
-    /* Streamlit widgets */
-    button, input, textarea, select {
-        color: #1a1a1a !important;
+    /* Tabs */
+    button[data-baseweb="tab"] {
+        color: #183153 !important;
+        font-weight: 700 !important;
     }
 
+    /* Radio/select text */
     .stRadio label, .stSelectbox label, .stSlider label {
         color: #1a1a1a !important;
     }
 
-    .stProgress > div > div > div > div {
-        border-radius: 999px;
+    /* Make metric labels readable */
+    [data-testid="stMetricLabel"] {
+        color: #183153 !important;
+        font-weight: 700 !important;
+    }
+
+    [data-testid="stMetricValue"] {
+        color: #122b57 !important;
+        font-weight: 800 !important;
     }
     </style>
     """,
@@ -461,11 +483,8 @@ with right:
     st.markdown('<div class="card">', unsafe_allow_html=True)
     st.markdown('<div class="section-title">📊 Results Dashboard</div>', unsafe_allow_html=True)
 
-    st.markdown('<div class="metric-label">ATP efficiency</div>', unsafe_allow_html=True)
-    st.progress(results["atp_score"] / 10)
-
-    st.markdown('<div class="metric-label">Growth potential</div>', unsafe_allow_html=True)
-    st.progress(results["growth_score"] / 100)
+    custom_meter("ATP efficiency", results["atp_score"] * 10, "linear-gradient(90deg, #3b82f6 0%, #60a5fa 100%)")
+    custom_meter("Growth potential", results["growth_score"], "linear-gradient(90deg, #10b981 0%, #34d399 100%)")
 
     st.markdown("#### 🧪 Byproducts")
     for item in results["byproducts"]:
