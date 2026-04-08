@@ -11,8 +11,8 @@ st.markdown("""
     <style>
     /* Target the selectbox input component */
     div[data-baseweb="select"] > div {
-        background-color: #f0f2f6; /* Change to your desired color */
-        color: black;
+        background-color: darkblue; /* Change to your desired color */
+        color: lightblue;
     }
     </style>
     """, unsafe_allow_html=True)
@@ -21,10 +21,10 @@ option = st.selectbox
 st.markdown("""
     <style>
     div[role="listbox"] ul {
-        background-color: #f0f2f6; /* Background of the dropdown list */
+        background-color: darkblue; /* Background of the dropdown list */
     }
     div[role="listbox"] li {
-        color: black; /* Color of the text in the list */
+        color: lightblue; /* Color of the text in the list */
     }
     </style>
     """, unsafe_allow_html=True)
@@ -416,45 +416,45 @@ st.markdown(
 
     /* Dropdowns / selectboxes */
     div[data-baseweb="select"] > div {
-        background: #ffffff !important;
-        color: #1a1a1a !important;
-        border: 1px solid #d6e0ee !important;
+        background: darkblue !important;
+        color: lightblue !important;
+        border: 1px solid darkblue !important;
         border-radius: 12px !important;
         min-height: 44px !important;
     }
 
     div[data-baseweb="select"] span {
-        color: #1a1a1a !important;
+        color: lightblue !important;
     }
 
     div[data-baseweb="select"] input {
-        color: #1a1a1a !important;
+        color: lightblue !important;
     }
 
     div[data-baseweb="select"] svg {
-        fill: #1a1a1a !important;
+        fill: lightblue !important;
     }
 
     div[role="listbox"] {
-        background: #ffffff !important;
-        color: #1a1a1a !important;
-        border: 1px solid #d6e0ee !important;
+        background: darkblue !important;
+        color: lightblue !important;
+        border: 1px solid darkblue !important;
     }
 
     div[role="option"] {
-        background: #ffffff !important;
-        color: #1a1a1a !important;
+        background: darkblue !important;
+        color: lightblue !important;
     }
 
     div[role="option"]:hover {
-        background: #fff7ed !important;
-        color: #1a1a1a !important;
+        background: darkblue !important;
+        color: lightblue !important;
     }
 
     /* Radio options: blue outline / white center, orange on hover */
     div[role="radiogroup"] label {
-        background: #ffffff !important;
-        border: 2px solid #60a5fa !important;
+        background: darkblue !important;
+        border: 2px solid darkblue !important;
         padding: 0.35rem 0.6rem;
         border-radius: 14px;
         margin-bottom: 0.45rem;
@@ -462,20 +462,20 @@ st.markdown(
     }
 
     div[role="radiogroup"] label:hover {
-        border-color: #f59e0b !important;
-        background: #fffaf0 !important;
+        border-color: lightblue !important;
+        background: lightblue !important;
     }
 
     div[role="radiogroup"] label p {
-        color: #1a1a1a !important;
+        color: lightblue !important;
         font-weight: 500;
     }
 
     /* Button styling */
     .stButton > button {
-        background: #ffffff !important;
-        color: #1d4ed8 !important;
-        border: 2px solid #60a5fa !important;
+        background: darkblue !important;
+        color: lightblue !important;
+        border: 2px solid darkblue !important;
         border-radius: 14px !important;
         font-weight: 700 !important;
         padding: 0.45rem 1rem !important;
@@ -483,15 +483,15 @@ st.markdown(
     }
 
     .stButton > button:hover {
-        background: #fffaf0 !important;
-        color: #b45309 !important;
-        border-color: #f59e0b !important;
+        background: darkblue !important;
+        color: lightblue !important;
+        border-color: darkblue !important;
     }
 
     .stButton > button:active {
-        background: #fff7ed !important;
-        color: #b45309 !important;
-        border-color: #f59e0b !important;
+        background: darkblue !important;
+        color: lightblue !important;
+        border-color: darkblue !important;
     }
 
     /* Remove extra vertical spacing that creates blank oval-looking gaps */
