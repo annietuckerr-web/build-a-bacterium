@@ -5,29 +5,6 @@ st.set_page_config(
     page_icon="🦠",
     layout="wide"
 )
-import streamlit as st
-
-st.markdown("""
-    <style>
-    /* Target the selectbox input component */
-    div[data-baseweb="select"] > div {
-        background-color: darkblue; /* Change to your desired color */
-        color: lightblue;
-    }
-    </style>
-    """, unsafe_allow_html=True)
-
-option = st.selectbox
-st.markdown("""
-    <style>
-    div[role="listbox"] ul {
-        background-color: darkblue; /* Background of the dropdown list */
-    }
-    div[role="listbox"] li {
-        color: lightblue; /* Color of the text in the list */
-    }
-    </style>
-    """, unsafe_allow_html=True)
 
 # -----------------------------
 # Helper logic
@@ -61,7 +38,7 @@ def compute_results(metabolism, carbon_source, nutrient_level, environment):
         )
         location = "Mostly in the cytoplasm"
         key_feature = "NADH is recycled by transferring electrons back to an internal organic molecule."
-        examples = "Common fermentation products include lactate, ethanol, acids, and gas."
+        examples = "Common fermentation products include labelate, ethanol, acids, and gas."
 
     elif metabolism == "Aerobic Respiration":
         atp_score = 9
@@ -284,7 +261,7 @@ challenge_bank = [
 ]
 
 # -----------------------------
-# Styling
+# Styling (FIXED DROPDOWNS SECTION)
 # -----------------------------
 st.markdown(
     """
@@ -414,47 +391,44 @@ st.markdown(
         font-weight: 700 !important;
     }
 
-    /* Dropdowns / selectboxes */
+    /* --- DROPDOWN FIXES START --- */
     div[data-baseweb="select"] > div {
-        background: darkblue !important;
-        color: lightblue !important;
-        border: 1px solid darkblue !important;
+        background-color: #ffffff !important;
+        color: #1a1a1a !important;
+        border: 1px solid #d6e0ee !important;
         border-radius: 12px !important;
         min-height: 44px !important;
     }
 
-    div[data-baseweb="select"] span {
-        color: lightblue !important;
-    }
-
-    div[data-baseweb="select"] input {
-        color: lightblue !important;
+    div[data-baseweb="select"] * {
+        color: #1a1a1a !important;
     }
 
     div[data-baseweb="select"] svg {
-        fill: lightblue !important;
+        fill: #1a1a1a !important;
     }
 
     div[role="listbox"] {
-        background: darkblue !important;
-        color: lightblue !important;
-        border: 1px solid darkblue !important;
+        background-color: #ffffff !important;
+        color: #1a1a1a !important;
+        border: 1px solid #d6e0ee !important;
     }
 
     div[role="option"] {
-        background: darkblue !important;
-        color: lightblue !important;
+        background-color: #ffffff !important;
+        color: #1a1a1a !important;
     }
 
     div[role="option"]:hover {
-        background: darkblue !important;
-        color: lightblue !important;
+        background-color: #fff7ed !important;
+        color: #1a1a1a !important;
     }
+    /* --- DROPDOWN FIXES END --- */
 
-    /* Radio options: blue outline / white center, orange on hover */
+    /* Radio options */
     div[role="radiogroup"] label {
-        background: darkblue !important;
-        border: 2px solid darkblue !important;
+        background: #ffffff !important;
+        border: 2px solid #60a5fa !important;
         padding: 0.35rem 0.6rem;
         border-radius: 14px;
         margin-bottom: 0.45rem;
@@ -462,20 +436,20 @@ st.markdown(
     }
 
     div[role="radiogroup"] label:hover {
-        border-color: lightblue !important;
-        background: lightblue !important;
+        border-color: #f59e0b !important;
+        background: #fffaf0 !important;
     }
 
     div[role="radiogroup"] label p {
-        color: lightblue !important;
+        color: #1a1a1a !important;
         font-weight: 500;
     }
 
     /* Button styling */
     .stButton > button {
-        background: darkblue !important;
-        color: lightblue !important;
-        border: 2px solid darkblue !important;
+        background: #ffffff !important;
+        color: #1d4ed8 !important;
+        border: 2px solid #60a5fa !important;
         border-radius: 14px !important;
         font-weight: 700 !important;
         padding: 0.45rem 1rem !important;
@@ -483,18 +457,11 @@ st.markdown(
     }
 
     .stButton > button:hover {
-        background: darkblue !important;
-        color: lightblue !important;
-        border-color: darkblue !important;
+        background: #fffaf0 !important;
+        color: #b45309 !important;
+        border-color: #f59e0b !important;
     }
 
-    .stButton > button:active {
-        background: darkblue !important;
-        color: lightblue !important;
-        border-color: darkblue !important;
-    }
-
-    /* Remove extra vertical spacing that creates blank oval-looking gaps */
     div.block-container {
         padding-top: 1rem !important;
     }
