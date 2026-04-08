@@ -5,6 +5,35 @@ st.set_page_config(
     page_icon="🦠",
     layout="wide"
 )
+[theme]
+primaryColor = "#F63366"
+backgroundColor = "#FFFFFF"
+secondaryBackgroundColor = "#F0F2F6"  # Light gray background for dropdowns
+textColor = "#262730"
+font = "sans serif"
+import streamlit as st
+
+st.markdown("""
+    <style>
+    /* Target the selectbox input component */
+    div[data-baseweb="select"] > div {
+        background-color: #f0f2f6; /* Change to your desired color */
+        color: black;
+    }
+    </style>
+    """, unsafe_allow_html=True)
+
+option = st.selectbox('Select an option', ['Option 1', 'Option 2'])
+st.markdown("""
+    <style>
+    div[role="listbox"] ul {
+        background-color: #f0f2f6; /* Background of the dropdown list */
+    }
+    div[role="listbox"] li {
+        color: black; /* Color of the text in the list */
+    }
+    </style>
+    """, unsafe_allow_html=True)
 
 # -----------------------------
 # Helper logic
@@ -147,13 +176,13 @@ def colored_tag(text, bg, color):
         f"""
         <div style="
             display:inline-block;
-            padding:0.3rem 0.7rem;
+            padding:0.35rem 0.75rem;
             border-radius:999px;
             background:{bg};
             color:{color};
             font-weight:700;
-            font-size:0.9rem;
-            margin-bottom:0.7rem;">
+            font-size:0.95rem;
+            margin-bottom:0.8rem;">
             {text}
         </div>
         """,
@@ -164,7 +193,7 @@ def colored_tag(text, bg, color):
 def custom_meter(label, value, fill_color, text_color="#183153"):
     st.markdown(
         f"""
-        <div style="margin-bottom:0.3rem; font-weight:700; color:{text_color};">{label}</div>
+        <div style="margin-bottom:0.35rem; font-weight:700; color:{text_color};">{label}</div>
         <div style="
             width:100%;
             height:10px;
@@ -266,29 +295,9 @@ challenge_bank = [
 st.markdown(
     """
     <style>
-    header {
-        visibility: hidden;
-    }
-
-    [data-testid="stToolbar"] {
-        display: none !important;
-    }
-
-    [data-testid="stDecoration"] {
-        display: none !important;
-    }
-
-    [data-testid="stStatusWidget"] {
-        display: none !important;
-    }
-
     .stApp {
         background: linear-gradient(180deg, #f8fbff 0%, #eef4ff 100%);
         color: #1a1a1a;
-    }
-
-    .block-container {
-        padding-top: 0.8rem !important;
     }
 
     p, span, label, li {
@@ -300,11 +309,11 @@ st.markdown(
     }
 
     .hero {
-        background: linear-gradient(135deg, #2563eb 0%, #3b82f6 70%, #60a5fa 100%);
+        background: linear-gradient(135deg, #1d4ed8 0%, #3b82f6 55%, #f59e0b 100%);
         padding: 2rem 2rem 1.5rem 2rem;
         border-radius: 24px;
-        margin-bottom: 1rem;
-        box-shadow: 0 10px 30px rgba(37, 99, 235, 0.16);
+        margin-bottom: 1.0rem;
+        box-shadow: 0 10px 30px rgba(29, 78, 216, 0.18);
     }
 
     .hero-title {
@@ -321,9 +330,9 @@ st.markdown(
     }
 
     .card {
-        background: rgba(255,255,255,0.97);
+        background: rgba(255,255,255,0.96);
         border: 1px solid rgba(220,230,245,0.95);
-        padding: 1.05rem;
+        padding: 1.15rem;
         border-radius: 22px;
         box-shadow: 0 8px 24px rgba(40, 60, 100, 0.08);
         margin-bottom: 1rem;
@@ -344,7 +353,7 @@ st.markdown(
         border-radius: 16px;
         font-size: 1.05rem;
         font-weight: 600;
-        margin: 0.45rem 0 0.85rem 0;
+        margin: 0.5rem 0 0.9rem 0;
         color: #15325b !important;
     }
 
@@ -379,7 +388,7 @@ st.markdown(
         border-radius: 20px;
         padding: 1rem 1.1rem;
         box-shadow: 0 6px 18px rgba(20, 40, 70, 0.06);
-        margin-bottom: 0.4rem;
+        margin-bottom: 0.5rem;
         min-height: 108px;
     }
 
@@ -411,24 +420,51 @@ st.markdown(
         font-weight: 700 !important;
     }
 
-    /* Compact radio styles for sidebar */
-    .stRadio > label {
-        font-size: 0.92rem !important;
-        font-weight: 700 !important;
-        margin-bottom: 0.2rem !important;
+    /* Dropdowns / selectboxes */
+    div[data-baseweb="select"] > div {
+        background: #ffffff !important;
+        color: #1a1a1a !important;
+        border: 1px solid #d6e0ee !important;
+        border-radius: 12px !important;
+        min-height: 44px !important;
     }
 
-    div[role="radiogroup"] {
-        gap: 0.1rem !important;
+    div[data-baseweb="select"] span {
+        color: #1a1a1a !important;
     }
 
+    div[data-baseweb="select"] input {
+        color: #1a1a1a !important;
+    }
+
+    div[data-baseweb="select"] svg {
+        fill: #1a1a1a !important;
+    }
+
+    div[role="listbox"] {
+        background: #ffffff !important;
+        color: #1a1a1a !important;
+        border: 1px solid #d6e0ee !important;
+    }
+
+    div[role="option"] {
+        background: #ffffff !important;
+        color: #1a1a1a !important;
+    }
+
+    div[role="option"]:hover {
+        background: #fff7ed !important;
+        color: #1a1a1a !important;
+    }
+
+    /* Radio options: blue outline / white center, orange on hover */
     div[role="radiogroup"] label {
         background: #ffffff !important;
-        border: 1.5px solid #bfdbfe !important;
-        padding: 0.18rem 0.45rem !important;
-        border-radius: 10px;
-        margin-bottom: 0.22rem !important;
-        min-height: auto !important;
+        border: 2px solid #60a5fa !important;
+        padding: 0.35rem 0.6rem;
+        border-radius: 14px;
+        margin-bottom: 0.45rem;
+        transition: all 0.2s ease;
     }
 
     div[role="radiogroup"] label:hover {
@@ -439,17 +475,6 @@ st.markdown(
     div[role="radiogroup"] label p {
         color: #1a1a1a !important;
         font-weight: 500;
-        font-size: 0.9rem !important;
-        line-height: 1.15 !important;
-    }
-
-    /* Sidebar spacing */
-    section[data-testid="stSidebar"] .element-container {
-        margin-bottom: 0.15rem !important;
-    }
-
-    section[data-testid="stSidebar"] .stMarkdown {
-        margin-bottom: 0.1rem !important;
     }
 
     /* Button styling */
@@ -459,7 +484,7 @@ st.markdown(
         border: 2px solid #60a5fa !important;
         border-radius: 14px !important;
         font-weight: 700 !important;
-        padding: 0.42rem 0.95rem !important;
+        padding: 0.45rem 1rem !important;
         box-shadow: 0 3px 8px rgba(29, 78, 216, 0.10);
     }
 
@@ -473,6 +498,11 @@ st.markdown(
         background: #fff7ed !important;
         color: #b45309 !important;
         border-color: #f59e0b !important;
+    }
+
+    /* Remove extra vertical spacing that creates blank oval-looking gaps */
+    div.block-container {
+        padding-top: 1rem !important;
     }
 
     .element-container:has([data-testid="stMetric"]) {
@@ -507,7 +537,7 @@ st.markdown(
 # -----------------------------
 st.sidebar.markdown("## ⚙️ Environment Controls")
 
-preset = st.sidebar.radio(
+preset = st.sidebar.selectbox(
     "Real-world preset",
     ["Custom", "Human gut", "Wetland soil", "Surface ocean"],
     index=0
@@ -515,21 +545,21 @@ preset = st.sidebar.radio(
 
 preset_values = preset_environment(preset) if preset != "Custom" else None
 
-oxygen = st.sidebar.radio(
+oxygen = st.sidebar.selectbox(
     "🫁 Oxygen level",
     ["Present", "Absent"],
     index=0 if preset_values is None else ["Present", "Absent"].index(preset_values["oxygen"])
 )
 
 electron_options = ["O₂ (oxygen)", "Nitrate (NO₃⁻)", "Sulfate (SO₄²⁻)", "TMAO", "None"]
-electron_acceptor = st.sidebar.radio(
+electron_acceptor = st.sidebar.selectbox(
     "⚡ Terminal electron acceptor",
     electron_options,
     index=0 if preset_values is None else electron_options.index(preset_values["electron_acceptor"])
 )
 
 carbon_options = ["Glucose", "Complex carbohydrate", "Mixed nutrients"]
-carbon_source = st.sidebar.radio(
+carbon_source = st.sidebar.selectbox(
     "🍞 Carbon source",
     carbon_options,
     index=0 if preset_values is None else carbon_options.index(preset_values["carbon_source"])
@@ -655,9 +685,9 @@ st.markdown("## Compare the Major Strategies")
 
 compare_left, compare_right = st.columns(2)
 with compare_left:
-    strategy_a = st.radio("Choose strategy A", list(comparison_data.keys()), index=0, horizontal=True)
+    strategy_a = st.selectbox("Choose strategy A", list(comparison_data.keys()), index=0)
 with compare_right:
-    strategy_b = st.radio("Choose strategy B", list(comparison_data.keys()), index=1, horizontal=True)
+    strategy_b = st.selectbox("Choose strategy B", list(comparison_data.keys()), index=1)
 
 col_a, col_b = st.columns(2)
 with col_a:
