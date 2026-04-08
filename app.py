@@ -17,7 +17,7 @@ st.markdown("""
     </style>
     """, unsafe_allow_html=True)
 
-option = st.selectbox('Select an option', ['Option 1', 'Option 2'])
+option = st.selectbox
 st.markdown("""
     <style>
     div[role="listbox"] ul {
@@ -450,26 +450,7 @@ st.markdown(
         background: #fff7ed !important;
         color: #1a1a1a !important;
     }
-/* REMOVE STREAMLIT TOP BLACK BAR */
-header {
-    visibility: hidden;
-}
 
-[data-testid="stToolbar"] {
-    display: none !important;
-}
-
-[data-testid="stDecoration"] {
-    display: none !important;
-}
-
-[data-testid="stStatusWidget"] {
-    display: none !important;
-}
-/* Pull app up after removing header */
-.block-container {
-    padding-top: 1rem !important;
-}
     /* Radio options: blue outline / white center, orange on hover */
     div[role="radiogroup"] label {
         background: #ffffff !important;
