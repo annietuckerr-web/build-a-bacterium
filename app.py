@@ -393,7 +393,7 @@ st.markdown(
 
     /* Dropdowns / selectboxes */
     div[data-baseweb="select"] > div {
-        background: blue !important;
+        background: lightblue !important;
         color: white !important;
         border: 1px solid #d6e0ee !important;
         border-radius: 12px !important;
@@ -413,24 +413,24 @@ st.markdown(
     }
 
     div[role="listbox"] {
-        background: blue !important;
+        background: lightblue !important;
         color: white !important;
         border: 1px solid #d6e0ee !important;
     }
 
     div[role="option"] {
-        background: blue !important;
+        background: lightblue !important;
         color: white !important;
     }
 
     div[role="option"]:hover {
-        background: orange !important;
+        background: white !important;
         color: white !important;
     }
 
     /* Radio options: blue outline / white center, orange on hover */
     div[role="radiogroup"] label {
-        background: #ffffff !important;
+        background: lightblue !important;
         border: 2px solid #60a5fa !important;
         padding: 0.35rem 0.6rem;
         border-radius: 14px;
@@ -450,7 +450,7 @@ st.markdown(
 
     /* Button styling */
     .stButton > button {
-        background: #ffffff !important;
+        background: lightblue !important;
         color: #1d4ed8 !important;
         border: 2px solid #60a5fa !important;
         border-radius: 14px !important;
