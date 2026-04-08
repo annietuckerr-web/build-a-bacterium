@@ -261,7 +261,7 @@ challenge_bank = [
 ]
 
 # -----------------------------
-# Styling (FIXED DROPDOWNS SECTION)
+# Styling 
 # -----------------------------
 st.markdown(
     """
@@ -316,6 +316,42 @@ st.markdown(
         color: #183153 !important;
     }
 
+    /* --- UPDATED DROPDOWN FIXES --- */
+    
+    /* Input box itself */
+    div[data-baseweb="select"] > div {
+        background-color: white !important;
+        color: black !important;
+    }
+
+    /* Target the text globally within select boxes */
+    div[data-baseweb="select"] * {
+        color: black !important;
+    }
+
+    /* The actual popup listbox */
+    ul[role="listbox"], [data-baseweb="popover"] {
+        background-color: white !important;
+    }
+
+    /* The individual items (options) in the list */
+    li[role="option"], div[role="option"] {
+        background-color: white !important;
+        color: black !important;
+    }
+
+    /* Text inside the items */
+    li[role="option"] *, div[role="option"] * {
+        color: black !important;
+    }
+
+    /* Hover effect on options */
+    li[role="option"]:hover, div[role="option"]:hover {
+        background-color: #f0f2f6 !important;
+    }
+
+    /* --- END DROPDOWN FIXES --- */
+
     .pathway-box {
         background: linear-gradient(135deg, #f5f9ff 0%, #ecf3ff 100%);
         border: 1px solid #dce8ff;
@@ -346,13 +382,6 @@ st.markdown(
         border-radius: 16px;
     }
 
-    .comparison-title {
-        font-size: 1.1rem;
-        font-weight: 800;
-        color: #183153 !important;
-        margin-bottom: 0.6rem;
-    }
-
     .stat-card {
         background: rgba(255,255,255,0.98);
         border: 1px solid #dfe8f5;
@@ -363,21 +392,6 @@ st.markdown(
         min-height: 108px;
     }
 
-    .stat-title {
-        font-size: 1rem;
-        font-weight: 700;
-        color: #44566c !important;
-        margin-bottom: 0.45rem;
-    }
-
-    .stat-value {
-        font-size: 2rem;
-        font-weight: 800;
-        color: #122b57 !important;
-        line-height: 1.1;
-        word-break: break-word;
-    }
-
     [data-testid="stSidebar"] {
         background: linear-gradient(180deg, #f7fbff 0%, #edf4ff 100%);
     }
@@ -386,92 +400,19 @@ st.markdown(
         color: #1a1a1a !important;
     }
 
-    button[data-baseweb="tab"] {
-        color: #183153 !important;
-        font-weight: 700 !important;
-    }
-
-    /* --- DROPDOWN FIXES START --- */
-    div[data-baseweb="select"] > div {
-        background-color: #ffffff !important;
-        color: #1a1a1a !important;
-        border: 1px solid #d6e0ee !important;
-        border-radius: 12px !important;
-        min-height: 44px !important;
-    }
-
-    div[data-baseweb="select"] * {
-        color: #1a1a1a !important;
-    }
-
-    div[data-baseweb="select"] svg {
-        fill: #1a1a1a !important;
-    }
-
-    div[role="listbox"] {
-        background-color: #ffffff !important;
-        color: #1a1a1a !important;
-        border: 1px solid #d6e0ee !important;
-    }
-
-    div[role="option"] {
-        background-color: #ffffff !important;
-        color: #1a1a1a !important;
-    }
-
-    div[role="option"]:hover {
-        background-color: #fff7ed !important;
-        color: #1a1a1a !important;
-    }
-    /* --- DROPDOWN FIXES END --- */
-
-    /* Radio options */
     div[role="radiogroup"] label {
         background: #ffffff !important;
         border: 2px solid #60a5fa !important;
         padding: 0.35rem 0.6rem;
         border-radius: 14px;
         margin-bottom: 0.45rem;
-        transition: all 0.2s ease;
     }
 
-    div[role="radiogroup"] label:hover {
-        border-color: #f59e0b !important;
-        background: #fffaf0 !important;
-    }
-
-    div[role="radiogroup"] label p {
-        color: #1a1a1a !important;
-        font-weight: 500;
-    }
-
-    /* Button styling */
     .stButton > button {
         background: #ffffff !important;
         color: #1d4ed8 !important;
         border: 2px solid #60a5fa !important;
         border-radius: 14px !important;
-        font-weight: 700 !important;
-        padding: 0.45rem 1rem !important;
-        box-shadow: 0 3px 8px rgba(29, 78, 216, 0.10);
-    }
-
-    .stButton > button:hover {
-        background: #fffaf0 !important;
-        color: #b45309 !important;
-        border-color: #f59e0b !important;
-    }
-
-    div.block-container {
-        padding-top: 1rem !important;
-    }
-
-    .element-container:has([data-testid="stMetric"]) {
-        display: none !important;
-    }
-
-    [data-testid="metric-container"] {
-        display: none !important;
     }
     </style>
     """,
